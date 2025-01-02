@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
+import logging
 
-
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 class Vehicle(ABC):
 
@@ -11,21 +13,21 @@ class Vehicle(ABC):
 
     @property
     @abstractmethod
-    def start_engine(self):
+    def start_engine(self) -> None:
         pass
 
-    def get_spec(self):
-        print(f"{self.make} {self.model} ({self.spec})")
+    def get_spec(self) -> None:
+        logger.info(f"{self.make} {self.model} ({self.spec})")
 
 class Car(Vehicle):
     @property
-    def start_engine(self):
-        print(f"{self.make} {self.model}: Двигун запущено")
+    def start_engine(self) -> None:
+        logger.info(f"{self.make} {self.model}: Двигун запущено")
 
 class Motorcycle(Vehicle):
     @property
-    def start_engine(self):
-        print(f"{self.make} {self.model}: Мотор заведено")
+    def start_engine(self) -> None:
+        logger.info(f"{self.make} {self.model}: Мотор заведено")
 
 
 class VehicleFactory(ABC):
